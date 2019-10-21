@@ -1,0 +1,24 @@
+{
+  "name": "phobos",
+  "version": "0.1.0",
+  "description": "Progressive Web App for editing markdown/wikitext/html documents hosted on Dropbox (and some day other backends)",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kenjura/phobos.git"
+  },
+  "keywords": [
+    "wiki",
+    "markdown",
+    "pwa"
+  ],
+  "author": "kenjura",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kenjura/phobos/issues"
+  },
+  "homepage": "https://github.com/kenjura/phobos#readme"
+}
