@@ -4,7 +4,7 @@
   "description": "Progressive Web App for editing markdown/wikitext/html documents hosted on Dropbox (and some day other backends)",
   "main": "src/index.js",
   "scripts": {
-    "start": "http-server src/ -P http://localhost:8080?",
+    "start": "superstatic src/ --debug true --port 8080 --host 127.0.0.1",
     "test": "npm test"
   },
   "repository": {
@@ -23,13 +23,14 @@
   },
   "homepage": "https://github.com/kenjura/phobos#readme",
   "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.4",
     "dropbox": "^4.0.30",
-    "http-server": "^0.11.1",
     "markdown-it": "^10.0.0",
     "markdown-it-container": "^2.0.0",
     "markdown-it-deflist": "^2.0.3",
     "markdown-it-sup": "^1.0.0",
-    "superstatic": "^6.0.4"
+    "nodemon": "^2.0.1"
   },
   "dependencies": {
     "@vaadin/router": "^1.5.0"
