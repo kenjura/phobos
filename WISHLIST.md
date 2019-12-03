@@ -7,4 +7,10 @@
 + Each article shows staleness
 + Statistical analysis of version history to predict likelihood article is out of date
 + PageDown (wysiwyg for markdown)
-+ use superstatic for local dev
+
+# Local Dev
++ no bulky bundlers!
+  + consider Browserify?
+  + custom code?
+  + problem is, Dropbox, Markdown-it, and other modules are just not packaged for the browser as-is
+  
