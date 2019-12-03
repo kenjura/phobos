@@ -7,3 +7,4 @@
 + Each article shows staleness
 + Statistical analysis of version history to predict likelihood article is out of date
 + PageDown (wysiwyg for markdown)
++ use superstatic for local dev
