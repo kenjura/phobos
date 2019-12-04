@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Progressive Web App for editing markdown/wikitext/html documents hosted on Dropbox (and some day other backends)",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
     "start": "http-server src/ -P http://localhost:8080?",
     "test": "npm test"
@@ -25,11 +26,14 @@
   "devDependencies": {
     "@babel/core": "^7.7.4",
     "@babel/plugin-transform-runtime": "^7.7.4",
+    "@babel/register": "^7.7.4",
+    "chai": "^4.2.0",
     "dropbox": "^4.0.30",
     "markdown-it": "^10.0.0",
     "markdown-it-container": "^2.0.0",
     "markdown-it-deflist": "^2.0.3",
     "markdown-it-sup": "^1.0.0",
+    "mocha": "^6.2.2",
     "nodemon": "^2.0.1"
   },
   "dependencies": {

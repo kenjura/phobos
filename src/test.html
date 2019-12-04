@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+  <title>Phobos</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style/index.css" />
+  <link href="https://unpkg.com/mocha@4.0.1/mocha.css" rel="stylesheet" />
+
+</head>
+<body>
+  <div id="mocha"></div>
+
+  <script src="https://unpkg.com/chai@4.1.2/chai.js"></script>
+  <script src="https://unpkg.com/mocha@4.0.1/mocha.js"></script>
+
+  <script>mocha.setup('bdd')</script>
+
+  <script type="module" src="/temp-test/file.test.js"></script>
+  <script type="module">
+    import { dummyTest, getFile } from '/model/file.js';
+
+    const { expect } = chai;
+
+
+  </script>
+
+  <script type="module">
+      mocha.checkLeaks();
+      mocha.run();
+  </script>
+</body>
+</html>
