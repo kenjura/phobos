@@ -6,8 +6,8 @@ const urlsToCache = [
   '/components/HomeView.js',
   '/components/LoginView.js',
   '/components/NotFoundView.js',
+  '/components/TopMenu.js',
   'https://unpkg.com/@vaadin/router',
-  '../node_modules/dropbox',
 
 ];
 

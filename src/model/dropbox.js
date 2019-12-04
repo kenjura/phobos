@@ -29,11 +29,11 @@ async function getDropbox() {
 }
 
 async function getFileContents(articlePath) {
-	// if (get(articlePath)) return get(articlePath);
+	if (get(articlePath)) return get(articlePath);
 	const dropbox = await getDropbox();
 	const path = await resolve(articlePath);
 	const content = await getFileByPath({ dropbox, path });
-	// set(articlePath, content);
+	set(articlePath, content);
 	return content;
 }
 

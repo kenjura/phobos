@@ -7,20 +7,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.30/Dropbox-sdk.min.js"></script>
 </head>
 <body>
-  <nav id="top-menu">
-    <!-- <li>
-      <a id="authlink">login to dropbox</a>
-    </li>
-    <li>
-      <a onclick="checkUser()">check user</a>
-    </li>
-    <li>
-      <a onclick="getFiles()">get files</a>
-    </li> -->
-    <li><a href="/">Home</a></li>
-    <li><a href="/campaigns/index.md">Example Article</a></li>
-    <li><a href="/blarb">Unknown</a></li>
-  </nav>
+  <top-menu></top-menu>
 
   <nav id="side-menu">
 
@@ -35,6 +22,7 @@
     import HomeView from '/components/HomeView.js';
     import LoginView from '/components/LoginView.js';
     import NotFoundView from '/components/NotFoundView.js';
+    import TopMenu from '/components/TopMenu.js';
 
     import { Router } from 'https://unpkg.com/@vaadin/router';
 
