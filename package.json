@@ -4,7 +4,7 @@
   "description": "Progressive Web App for editing markdown/wikitext/html documents hosted on Dropbox (and some day other backends)",
   "main": "src/index.js",
   "scripts": {
-    "start": "superstatic src/ --debug true --port 8080 --host 127.0.0.1",
+    "start": "http-server src/ -P http://localhost:8080?",
     "test": "npm test"
   },
   "repository": {
