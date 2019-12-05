@@ -5,8 +5,8 @@ export default class File {
 		this.extension = props.extension;
 		this.type = props.type;
 		this.filename = props.filename;
-		this.contents = this.contents;
-		this.loadedAt = this.loadedAt;
+		this.contents = props.contents;
+		this.loadedAt = props.loadedAt;
 		this.loaded = !!this.contents;
 	}
 }
