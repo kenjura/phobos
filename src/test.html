@@ -15,14 +15,9 @@
 
   <script>mocha.setup('bdd')</script>
 
-  <script type="module" src="/temp-test/file.test.js"></script>
-  <script type="module">
-    import { dummyTest, getFile } from '/model/file.js';
-
-    const { expect } = chai;
-
-
-  </script>
+  <!-- <script type="module" src="/temp-test/file.test.js"></script> -->
+  <script type="module" src="/temp-test/parseFileMetadata.test.js"></script>
+  <!-- <script type="module" src="/temp-test/FileLoader.test.js"></script> -->
 
   <script type="module">
       mocha.checkLeaks();
