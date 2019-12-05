@@ -9,7 +9,7 @@ function parseFileMetadata(filepath) {
 	const path = getPath(filepath);
 	const type = getType(filepath);
 
-	return { extension, filepath, path, type };
+	return { extension, filename, path, type };
 }
 
 
