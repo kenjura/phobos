@@ -1,18 +1,29 @@
+import File from '/model/classes/File.js';
 import FileList from '/model/classes/FileList.js';
 
-import { resolveArticle } from '/model/services/FileLoader.js';
+import { load, resolveAndLoad } from '/model/services/FileLoader.js';
 
 const { expect } = chai; // chai isn't an ES module. the test harness loaded it globally. sigh
+const { DropboxFileLoader } = getMockServices();
 const { fileList } = getMockData();
 
-describe('FileLoader > resolveArticle', async () => {
-	it('correctly resolves "/foo.md"', () => {
+describe('FileLoader > load', async () => {
+	const { downloadFile } = DropboxFileLoader;
+
+	it('loads "/foo.md"', async () => {
 		const fuzzypath = '/foo.md';
-		const actual = resolveArticle({ fileList, fuzzypath });
-		expect(actual).to.eq(7);
+		const actual = await resolveAndLoad({ fileList, fuzzypath, downloadFile });
+		expect(actual.contents).to.eq('file contents');
 	});
 });
 
+function getMockServices() {
+	return {
+		DropboxFileLoader: {
+			downloadFile: path => 'file contents',
+		}
+	}
+}
 
 function getMockData() {
 	return {
