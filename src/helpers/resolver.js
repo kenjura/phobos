@@ -1,4 +1,5 @@
 import { parseFileMetadata } from '/helpers/parseFileMetadata.js';
+import { sortByScore } from '/helpers/score.js';
 
 export { getArticleCandidates, resolveArticle };
 
@@ -29,11 +30,18 @@ function getArticleCandidates(fuzzypath) {
 	return candidates;
 }
 
-/*
-scores:
 
-*/
+function resolveArticle({ fileList, fuzzypath }={}) {
+	console.assert(Array.isArray(fileList), 'fileList should be an array');
+	console.assert(typeof(fuzzypath) === 'string');
 
-function resolveArticle(fuzzypath) {
+	const candidates = getArticleCandidates(fuzzypath);
+	const candidatesThatExist = candidates.filter(candidate => fileList.includes(candidate.hardpath));
 
+	// console.log(fuzzypath);
+	// console.log(candidatesThatExist.map(c => `\t${c.hardpath} ${c.score.join('.')}`));
+
+	const sortedCandidates = sortByScore(candidatesThatExist, c => c.score);
+
+	return sortedCandidates[0];
 }
