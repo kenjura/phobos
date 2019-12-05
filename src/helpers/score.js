@@ -4,9 +4,7 @@ function sortByScore(scores) {
 	console.assert(Array.isArray(scores), 'argument to sortByScore should be an array');
 	scores.forEach(score => console.assert(Array.isArray(score), 'each element in scores array should be itself an array of numbers'));
 
-	console.log('in', scores.map(a => a.join('.')));
 	const sorted = scores.sort(sortScores)
-	console.log('out', sorted.map(a => a.join('.')));
 
 	return sorted;
 }
