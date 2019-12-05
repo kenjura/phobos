@@ -12,6 +12,14 @@ describe('score', () => {
 			expect(actual).to.eql(expected);
 		})
 	})
+
+	it('knows how to use a predicate function', () => {
+		const arr = [ {score:[1]}, {score:[3]}, {score:[2]} ];
+		const predicate = obj => obj.score;
+		const actual = sortByScore(arr, predicate);
+		const expected = [ {score:[1]}, {score:[2]}, {score:[3]} ];
+		expect(actual).to.eql(expected);
+	})
 });
 
 function first(arr) { return arr[0] };

@@ -1,10 +1,11 @@
 export { sortByScore };
 
-function sortByScore(scores) {
+function sortByScore(scores, predicate=a=>a) {
+	// note: predicate is a function applied to each element to get the actual score
 	console.assert(Array.isArray(scores), 'argument to sortByScore should be an array');
 	scores.forEach(score => console.assert(Array.isArray(score), 'each element in scores array should be itself an array of numbers'));
 
-	const sorted = scores.sort(sortScores)
+	const sorted = scores.sort((a,b) => sortScores(predicate(a), predicate(b)));
 
 	return sorted;
 }
