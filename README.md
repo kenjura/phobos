@@ -1,7 +1,14 @@
 # What's going on
 
-Currently trying to get the thing working again. Seems like I was in the middle of migrating to Superstatic so that local dev could use node_module paths in imports. In progress...
+Currenltly not working.
 
+Recently migrated to new model system. Everything should work, except the resolver requires a file list.
+
+Need to migrate getFileList from leeloo, then provide fileList to FileLoader > resolveAndLoad (referenced in ArticleView).
+
+For now, I'm faking it with a hard-coded fileList to make sure everything else works. It does, seemingly. To the extent it was tested, of course.
+
+Also, I should probably change File.contents to File.content (or just settle on one).
 
 
 # Phobos

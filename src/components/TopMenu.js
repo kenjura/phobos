@@ -1,4 +1,4 @@
-import { getFileContents, isAuthenticated } from '/model/dropbox.js';
+import { isAuthenticated } from '/model/services/dropbox.js';
 
 export default class TopMenu extends HTMLElement {
 
@@ -10,6 +10,8 @@ export default class TopMenu extends HTMLElement {
   }
 
   connectedCallback() {
+    this.innerHTML = '<nav id="top-menu">loading menu...</nav>';
+
     this.innerHTML = `<nav id="top-menu">
     <!-- <li>
       <a id="authlink">login to dropbox</a>

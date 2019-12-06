@@ -1,18 +1,20 @@
 import File from '/model/classes/File.js';
 import FileList from '/model/classes/FileList.js';
 
+import { downloadFile } from '/model/services/dropbox.js';
 import { parseFileMetadata } from '/helpers/parseFileMetadata.js';
 import { resolveArticle } from '/helpers/resolver.js';
 
 export { load, resolveAndLoad };
 
-async function load({ file, downloadFile=downloadFile }={}) {
+async function load({ file, downloader }={}) {
 	if (!file) throw new Error('FileLoader > load > requires argument "file"');
 	if (!file instanceof File) throw new Error('FileLoader > load > argument "file" must be an instance of File');
 	if (!file.hardpath) throw new Error('FileLoader > load > file does not have a hardpath.');
-	if (!downloadFile) throw new Error('FileLoader > load > requires argument "downloadFile"');
+	// if (!downloadFile) throw new Error('FileLoader > load > requires argument "downloadFile"');
+	if (!downloader) downloader = downloadFile;
 
-	const content = await downloadFile({ path:file.hardpath });
+	const content = await downloader({ hardpath:file.hardpath });
 	file.contents = content;
 	file.loaded = true;
 	file.loadedAt = Date.now();
@@ -31,10 +33,4 @@ async function resolveAndLoad({ fileList, fuzzypath, downloadFile }) {
 	file.hardpath = hardpath;
 	await load({ file, downloadFile });
 	return file;
-}
-
-const downloadFile = async function({ path }) {
-	// mock of DropboxFileLoader.downloadFile
-
-	return 'file contents!';
 }

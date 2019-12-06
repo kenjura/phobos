@@ -1,5 +1,4 @@
 import { get, set } from '/helpers/cache.js';
-import { Router } from 'https://unpkg.com/@vaadin/router';
 
 // NOTE: window.Dropbox is magically inserted via Dropbox SDK. sigh...
 

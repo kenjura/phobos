@@ -1,4 +1,4 @@
-import { getLogin, ingestAccessToken } from '/model/dropbox.js';
+import { getLogin, ingestAccessToken } from '/model/services/dropbox.js';
 import { Router } from 'https://unpkg.com/@vaadin/router';
 
 export default class LoginView extends HTMLElement {
