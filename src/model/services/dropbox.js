@@ -2,7 +2,7 @@
 
 import { get, set } from '/helpers/cache.js';
 
-export { downloadFile, getDropbox, getLogin, ingestAccessToken, isAuthenticated };
+export { downloadFile, getDropbox, getFileList, getLogin, ingestAccessToken, isAuthenticated };
 
 
 const CONFIG = { // todo: this should be server-side and proxied!
@@ -29,6 +29,46 @@ function getDropbox() {
 	} else {
 		window.history.pushState({ returnUrl:window.location.href }, 'Phobos > log in to dropbox', '/login');
 	} 
+}
+
+
+async function getFileList(db, args={}) {
+	const cacheKey = `${db}:file-list`;
+	if (get(cacheKey) && !args.noCache) return get(cacheKey);
+
+	const dropbox = new Dropbox({ accessToken: process.env.DROPBOX_ACCESS_TOKEN, fetch: fetch });
+
+	const path = `/${process.env.DROPBOX_ROOT}/${db}`;
+	const recursive = true;
+
+	debug(`getFileList > attempting to load file list for db "${db}"`);
+
+	let cursor, has_more = true, requests = 0;
+	const fileList = [];
+	do {
+		const args = { path, recursive };
+		requests++;
+		debug(`getFileList > request #${requests}`);
+
+		let response;
+		if (cursor) response = await dropbox.filesListFolderContinue({ cursor });
+		else response = await dropbox.filesListFolder(args);
+
+		const { entries } = response;
+		cursor = response.cursor;
+		has_more = response.has_more;
+		fileList.push(...entries.map(entry => entry.path_lower));
+	} while(has_more && requests < MAX_SEQUENTIAL_REQUESTS);
+
+	// clean data
+	for (let i = 0; i < fileList.length; i++) {
+		fileList[i] = fileList[i].replace(`/${process.env.DROPBOX_ROOT.toLowerCase()}`, '');
+	}
+
+	// return
+	debug('getFileList > fileList = ',fileList);
+	put(cacheKey, fileList);
+	return fileList;
 }
 
 function ingestAccessToken() {
