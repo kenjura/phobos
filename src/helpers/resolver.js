@@ -1,5 +1,5 @@
-import { parseFileMetadata } from '/helpers/parseFileMetadata.js';
-import { sortByScore } from '/helpers/score.js';
+import { parseFileMetadata } from './parseFileMetadata.js';
+import { sortByScore } from './score.js';
 
 export { getArticleCandidates, resolveArticle };
 
@@ -35,7 +35,7 @@ function resolveArticle({ fileList, fuzzypath }={}) {
 	console.assert(Array.isArray(fileList), 'fileList should be an array');
 	console.assert(typeof(fuzzypath) === 'string');
 
-	const candidates = getArticleCandidates(fuzzypath);
+	const candidates = getArticleCandidates(fuzzypath.toLowerCase());
 	const candidatesThatExist = candidates.filter(candidate => fileList.includes(candidate.hardpath));
 
 	// console.log(fuzzypath);

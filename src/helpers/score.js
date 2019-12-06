@@ -5,6 +5,8 @@ function sortByScore(scores, predicate=a=>a) {
 	console.assert(Array.isArray(scores), 'argument to sortByScore should be an array');
 	scores.forEach(score => console.assert(Array.isArray(score), 'each element in scores array should be itself an array of numbers'));
 
+	if (scores.length < 2) return scores;
+
 	const sorted = scores.sort((a,b) => sortScores(predicate(a), predicate(b)));
 
 	return sorted;

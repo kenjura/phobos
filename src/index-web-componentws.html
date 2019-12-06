@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <title>Phobos</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style/index.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropbox.js/4.0.30/Dropbox-sdk.min.js"></script>
+</head>
+<body>
+  <top-menu></top-menu>
+
+  <nav id="side-menu">
+
+  </nav>
+
+  <main>
+    <div id="route-base"></div>
+  </main>
+
+  <script type="module">
+    import ArticleView from '/components/ArticleView.js';
+    import HomeView from '/components/HomeView.js';
+    import LoginView from '/components/LoginView.js';
+    import NotFoundView from '/components/NotFoundView.js';
+    import TopMenu from '/components/TopMenu.js';
+
+    import { Router } from 'https://unpkg.com/@vaadin/router';
+
+    const router = new Router(document.getElementById('route-base'));
+    router.setRoutes([
+      { path: '/', component: 'home-view' },
+      { path: '/login/:returnUrl?', component: 'login-view' },
+      // { path: '/:articlePath', component: 'article-view' },
+      { path: '([^$]+)', component: 'article-view' },
+      { path: '(.*)', component: 'not-found-view' },
+    ]);
+
+    window.addEventListener('load', async () => {
+      if ('serviceWorker' in navigator) {
+        try {
+          await navigator.serviceWorker.register('/service-worker.js');
+        } catch (err) {
+          console.log('ServiceWorker registration failed', err);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

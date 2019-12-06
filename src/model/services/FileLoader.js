@@ -1,9 +1,9 @@
-import File from '/model/classes/File.js';
-import FileList from '/model/classes/FileList.js';
+import File from '../classes/File.js';
+import FileList from '../classes/FileList.js';
 
-import { downloadFile } from '/model/services/dropbox.js';
-import { parseFileMetadata } from '/helpers/parseFileMetadata.js';
-import { resolveArticle } from '/helpers/resolver.js';
+import { downloadFile } from '../services/dropbox.js';
+import { parseFileMetadata } from '../../helpers/parseFileMetadata.js';
+import { resolveArticle } from '../../helpers/resolver.js';
 
 export { load, resolveAndLoad };
 
@@ -28,7 +28,8 @@ async function resolveAndLoad({ fileList, fuzzypath, downloadFile }) {
 	if (!fuzzypath) throw new Error('FileLoader > resolveAndLoad > requires argument "fuzzypath"');
 
 	const metadata = parseFileMetadata(fuzzypath);
-	const { hardpath } = resolveArticle({ fileList, fuzzypath });
+	const resolution = resolveArticle({ fileList, fuzzypath });
+	const { hardpath } = resolution;
 	const file = new File(metadata);
 	file.hardpath = hardpath;
 	await load({ file, downloadFile });

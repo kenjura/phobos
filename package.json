@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "http-server src/ -P http://localhost:8080?",
+    "start": "parcel -p 8080 src/index.html",
     "test": "npm test"
   },
   "repository": {
@@ -27,6 +27,8 @@
     "@babel/core": "^7.7.4",
     "@babel/plugin-transform-runtime": "^7.7.4",
     "@babel/register": "^7.7.4",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
     "chai": "^4.2.0",
     "dropbox": "^4.0.30",
     "markdown-it": "^10.0.0",
@@ -34,9 +36,18 @@
     "markdown-it-deflist": "^2.0.3",
     "markdown-it-sup": "^1.0.0",
     "mocha": "^6.2.2",
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.1",
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.23.7"
   },
   "dependencies": {
-    "@vaadin/router": "^1.5.0"
+    "@vaadin/router": "^1.5.0",
+    "humanize": "0.0.9",
+    "query-string": "^6.9.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2",
+    "style": "0.0.3",
+    "title-case": "^3.0.2"
   }
 }

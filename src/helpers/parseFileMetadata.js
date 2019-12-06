@@ -1,4 +1,6 @@
-export { getExtension, getFilename, getPath, getType, parseFileMetadata };
+import { titleCase } from "title-case";
+
+export { getExtension, getFilename, getPath, getTitle, getType, parseFileMetadata };
 
 function parseFileMetadata(filepath) {
 	// var filename = fullPath.replace(/^.*[\\\/]/, '')
@@ -7,9 +9,10 @@ function parseFileMetadata(filepath) {
 	const extension = getExtension(filepath);
 	const filename = getFilename(filepath);
 	const path = getPath(filepath);
+	const title = getTitle(filepath);
 	const type = getType(filepath);
 
-	return { extension, filename, path, type };
+	return { extension, filename, path, title, type };
 }
 
 
@@ -28,6 +31,11 @@ function getPath(filepath) {
 	if (i > 0) return filepath.substr(0, i) || null;
 	if (i === 0) return '/';
 	if (i === -1) return '.';
+}
+
+function getTitle(filepath) {
+	const filename = getFilename(filepath);
+	return titleCase(filename);
 }
 
 function getType(filepath) {

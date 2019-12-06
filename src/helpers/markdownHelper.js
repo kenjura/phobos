@@ -1,18 +1,14 @@
-// import '../node_modules/markdown-it';
-// import '../node_modules/markdown-it-container'
-// import '../node_modules/markdown-it-sup'
-// import '../node_modules/markdown-it-deflist'
-import 'https://cdnjs.cloudflare.com/ajax/libs/markdown-it/10.0.0/markdown-it.min.js';
-import 'https://cdn.jsdelivr.net/npm/markdown-it-container@2.0.0/dist/markdown-it-container.min.js';
-import 'https://cdn.jsdelivr.net/npm/markdown-it-sup@1.0.0/dist/markdown-it-sup.min.js';
-import 'https://cdn.jsdelivr.net/npm/markdown-it-deflist@2.0.3/dist/markdown-it-deflist.min.js';
+import MarkdownIt from 'markdown-it';
+import markdownItContainer from 'markdown-it-container'
+import markdownItSup from 'markdown-it-sup'
+import markdownItDeflist from 'markdown-it-deflist'
 
 
-var md = window.markdownit();
+var md = new MarkdownIt();
 
-md.use(window.markdownitContainer, 'aside', getAside());
-md.use(window.markdownitDeflist);
-md.use(window.markdownitSup);
+md.use(markdownItContainer, 'aside', getAside());
+md.use(markdownItDeflist);
+md.use(markdownItSup);
 
 export { markdownToHtml }
 
