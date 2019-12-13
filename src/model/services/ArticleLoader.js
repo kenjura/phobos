@@ -1,4 +1,4 @@
-import { downloadFile, getFileList } from './dropbox';
+import { downloadFile, getFileList as _getFileList } from './dropbox';
 import { resolveAndLoad } from './FileLoader';
 import { resolveMenuOrStyle } from '../../helpers/resolver';
 import { loadFileList } from './FileListLoader';
@@ -6,7 +6,7 @@ import { markdownToHtml } from '../../helpers/markdownHelper';
 
 export { load };
 
-async function load({ fuzzypath, getFileList, _downloadFile }={}) {
+async function load({ fuzzypath, getFileList=_getFileList, _downloadFile }={}) {
 	if (!fuzzypath) throw new Error('Article > load > fuzzypath is required');
 
 	const fileList = await loadFileList({ getFileList });
@@ -18,16 +18,19 @@ async function load({ fuzzypath, getFileList, _downloadFile }={}) {
 }
 
 async function loadArticle({ _downloadFile, fuzzypath, fileList }) {
+	console.debug('ArticleLoader > loadArticle > begin');
 	const file = await resolveAndLoad({ fileList, fuzzypath, _downloadFile, type:'article' });
 	return file;
 }
 
 async function loadMenu({ _downloadFile, fuzzypath, fileList }) {
+	console.debug('ArticleLoader > loadMenu > begin');
 	const file = await resolveAndLoad({ fileList, fuzzypath, _downloadFile, type:'menu' });
 	return file;
 }
 
 async function loadStyle({ _downloadFile, fuzzypath, fileList }) {
+	console.debug('ArticleLoader > loadStyle > begin');
 	const file = await resolveAndLoad({ fileList, fuzzypath, _downloadFile, type:'style' });
 	return file;
 }
