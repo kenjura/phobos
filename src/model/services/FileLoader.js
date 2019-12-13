@@ -3,18 +3,17 @@ import FileList from '../classes/FileList.js';
 
 import { downloadFile } from '../services/dropbox.js';
 import { parseFileMetadata } from '../../helpers/parseFileMetadata.js';
-import { resolveArticle } from '../../helpers/resolver.js';
+import { resolveArticle, resolveMenuOrStyle } from '../../helpers/resolver.js';
 
 export { load, resolveAndLoad };
 
-async function load({ file, downloader }={}) {
+async function load({ file, _downloadFile=downloadFile }={}) {
 	if (!file) throw new Error('FileLoader > load > requires argument "file"');
 	if (!file instanceof File) throw new Error('FileLoader > load > argument "file" must be an instance of File');
 	if (!file.hardpath) throw new Error('FileLoader > load > file does not have a hardpath.');
 	// if (!downloadFile) throw new Error('FileLoader > load > requires argument "downloadFile"');
-	if (!downloader) downloader = downloadFile;
 
-	const content = await downloader({ hardpath:file.hardpath });
+	const content = await _downloadFile({ hardpath:file.hardpath });
 	file.contents = content;
 	file.loaded = true;
 	file.loadedAt = Date.now();
@@ -22,16 +21,18 @@ async function load({ file, downloader }={}) {
 	return file;
 }
 
-async function resolveAndLoad({ fileList, fuzzypath, downloadFile }) {
+async function resolveAndLoad({ fileList, fuzzypath, _downloadFile, type }) {
 	if (!fileList) throw new Error('FileLoader > resolveAndLoad > requires argument "fileList"');
 	if (!Array.isArray(fileList)) throw new Error('FileLoader > resolveAndLoad > argument "fileList" must be a valid FileList');
 	if (!fuzzypath) throw new Error('FileLoader > resolveAndLoad > requires argument "fuzzypath"');
+	if (!type) throw new Error('FileLoader > resolveAndLoad > requires argument "type" (value: article || menu || style)');
 
 	const metadata = parseFileMetadata(fuzzypath);
-	const resolution = resolveArticle({ fileList, fuzzypath });
+	const resolver = type === 'article' ? resolveArticle : resolveMenuOrStyle;
+	const resolution = resolver({ fileList, fuzzypath, which:type });
 	const { hardpath } = resolution;
 	const file = new File(metadata);
 	file.hardpath = hardpath;
-	await load({ file, downloadFile });
+	await load({ file, _downloadFile });
 	return file;
 }

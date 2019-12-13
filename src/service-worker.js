@@ -1,13 +1,13 @@
 const CACHE_NAME = 'my-site-cache-v1';
 const urlsToCache = [
   '/',
-  '/styles/index.css',
-  '/components/ArticleView.js',
-  '/components/HomeView.js',
-  '/components/LoginView.js',
-  '/components/NotFoundView.js',
-  '/components/TopMenu.js',
-  'https://unpkg.com/@vaadin/router',
+  // '/styles/index.css',
+  // '/components/ArticleView.js',
+  // '/components/HomeView.js',
+  // '/components/LoginView.js',
+  // '/components/NotFoundView.js',
+  // '/components/TopMenu.js',
+  // 'https://unpkg.com/@vaadin/router',
 
 ];
 

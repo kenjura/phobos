@@ -1,3 +1,8 @@
+# Urgent
++ [ ] fix tests in resolver.test.js (review recent changes for menu loading)
++ [ ] remove test and other objects no longer in use
+
+
 # Alpha 1
 
 + [ ] Top Menu
@@ -6,6 +11,17 @@
 + [ ] Edit Mode
 + [ ] Re-enable unit tests
 + [ ] autoIndex pages
++ [ ] testing
+  + [ ] parseFileMetadata
+    + [ ] add tests for getTitle (including when filename === null)
+    + [ ] add tests for parseFileMetadata
+  + [ ] resolver
+    + [ ] separate getCandidates, score, and sort steps for testability
+    + [ ] remove magic difference between articles, menu, and style
+    + [ ] current tests are not catching the fact that resolveMenuOrStyle DOES NOT FILTER BASED ON FILELIST (moron)
+    + [ ] current tests likely broken because candidate pseudo-model in resolveMenuOrStyle has been changed to "hardpath" instead of "candidate" to match the output of resolve()
+  + [ ] migrate old in-browser tests
+  + [ ] everything else ;-)
 
 
 # Alpha 2

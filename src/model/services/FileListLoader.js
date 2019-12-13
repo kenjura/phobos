@@ -1,6 +1,6 @@
 import FileList from '../classes/FileList.js';
 
-import { parseFileMetadata } from '/helpers/parseFileMetadata.js';
+import { parseFileMetadata } from '../../helpers/parseFileMetadata.js';
 
 export { loadFileList };
 

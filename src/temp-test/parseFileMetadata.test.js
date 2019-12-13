@@ -1,4 +1,4 @@
-import { getExtension, getFilename, getPath, getType } from '/helpers/parseFileMetadata.js';
+import { getExtension, getFilename, getPath, getStartPath, getType } from '/helpers/parseFileMetadata.js';
 
 const { expect } = chai; // chai isn't an ES module. the test harness loaded it globally. sigh
 const { files } = getMockData();
@@ -39,9 +39,17 @@ describe('parseFileMetadata > getType', async () => {
 	}
 });
 
+test('parseFileMetadata > getStartPath', async () => {
+	const fuzzypath = '/foo';
+	const expected = '/foo/';
+	const actual = getStartPath(fuzzypath);
+	expect(actual).toBe(expected);
+});
+
 function getMockData() {
 	return {
 		files: {
+			0: { filepath:'/',                 path:'/',        filename:null,       extension:null, type:'folder' },
 			1: { filepath:'/foo/bar.md',       path:'/foo',     filename:'bar.md',   extension:'.md', type:'file' },
 			2: { filepath:'/foo/bar',          path:'/foo',     filename:'bar',      extension:null,  type:'ambiguous' },
 			3: { filepath:'/foo/',             path:'/foo',     filename:null,       extension:null,  type:'folder' },

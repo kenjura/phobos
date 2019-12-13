@@ -1,7 +1,18 @@
 <html>
-<title>Hello React</title>
+<title>Phobos</title>
 <body>
 	<div id="root"></div>
 	<script src="index.jsx"></script>
+	<script>
+		window.addEventListener('load', async () => {
+			if ('serviceWorker' in navigator) {
+				try {
+					await navigator.serviceWorker.register('/service-worker.js');
+				} catch (err) {
+					console.log('ServiceWorker registration failed', err);
+				}
+			}
+		});
+	</script>
 </body>
 </html>

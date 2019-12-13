@@ -1,0 +1,4 @@
++ Article: smart
+  + ArticleView: view mode
+  + ArticleEdit: edit mode
+  + ArticleContent: just renders html

@@ -1,5 +1,5 @@
 import { Dropbox } from 'dropbox';
-import { get, set } from '/helpers/cache.js';
+import { get, set } from '../../helpers/cache.js';
 
 export { downloadFile, getDropbox, getFileList, getLogin, ingestAccessToken, isAuthenticated };
 
@@ -11,10 +11,13 @@ const CONFIG = { // todo: this should be server-side and proxied!
 }
 
 async function downloadFile({ dropbox=getDropbox(), hardpath }) {
+	const cacheKey = `file: ${hardpath}`;
+	if (get(cacheKey)) return get(cacheKey);
 	const path = `${CONFIG.ROOT_PATH}/${hardpath}`.replace(/\/\//g, '/');
 	const response = await dropbox.filesDownload({ path });
 	const fileContent = await readBlob(response.fileBlob);
-	return fileContent
+	set(cacheKey, fileContent);
+	return fileContent;
 }
 
 async function getLogin({ returnUrl='http://localhost:8080/login/success' }={}) {

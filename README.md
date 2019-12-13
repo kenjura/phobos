@@ -2,6 +2,8 @@
 
 In the midst of migrating to React/parcel. Basic alpha test works. Lots of old code to remove. New model is wired up.
 
+Currently working on loading menus...
+
 
 # Phobos
 

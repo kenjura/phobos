@@ -2,7 +2,7 @@ export { get, set };
 
 function get(key) {
 	if (sessionStorage.getItem(key)) {
-		console.debug(`cache hit for "${key}"`);
+		console.debug(`cache hit for "${key}" (session storage)`);
 		return JSON.parse(sessionStorage.getItem(key));
 	} else {
 		return 

@@ -35,7 +35,7 @@ export default class Article extends React.Component {
 		this.setState({ fileList });
 
 		const fuzzypath = articlePath;
-		const file = await resolveAndLoad({ fileList, fuzzypath, downloadFile });
+		const file = await resolveAndLoad({ fileList, fuzzypath, downloadFile, type:'article' });
 		const content = file.contents;
 		const body = markdownToHtml(content); // TODO: use article.render(), don't just assume markdown
 
@@ -86,6 +86,6 @@ const ArticleMetadata = props => <div style={{ background:'#EEE', margin:'20px' 
 
 const FileList = props => <div style={{ background:'#EEE', margin:'20px' }}>
 	<ul>
-		{ props.fileList.map(file => <li>{file}</li>) }
+		{ props.fileList.map(file => <li key={file}>{file}</li>) }
 	</ul>
 </div>
