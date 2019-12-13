@@ -1,5 +1,7 @@
 # Urgent
-+ [ ] fix tests in resolver.test.js (review recent changes for menu loading)
++ [ ] resolveMenuOrStyle doesn't work when fuzzypath is an unambiguous file
++ [ ] resolveMenuOrStyle doesn't work in practice at all
++ [ ] need to memoize ArticleLoader parallel loads to avoid redundant calls
 + [ ] remove test and other objects no longer in use
 
 
