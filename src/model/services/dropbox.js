@@ -12,7 +12,8 @@ const CONFIG = { // todo: this should be server-side and proxied!
 
 async function downloadFile({ dropbox=getDropbox(), hardpath }) {
 	const cacheKey = `file: ${hardpath}`;
-	if (get(cacheKey)) return get(cacheKey);
+	// if (get(cacheKey)) return get(cacheKey);
+	console.warn('dropbox > downloadFile > cache get temporarily disabled!!!');
 	const path = `${CONFIG.ROOT_PATH}/${hardpath}`.replace(/\/\//g, '/');
 	const response = await dropbox.filesDownload({ path });
 	const fileContent = await readBlob(response.fileBlob);
