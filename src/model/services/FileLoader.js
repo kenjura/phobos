@@ -30,6 +30,7 @@ async function resolveAndLoad({ fileList, fuzzypath, _downloadFile, type }) {
 	const metadata = parseFileMetadata(fuzzypath);
 	const resolver = type === 'article' ? resolveArticle : resolveMenuOrStyle;
 	const resolution = resolver({ fileList, fuzzypath, which:type });
+	if (!resolution) return null;
 	const { hardpath } = resolution;
 	const file = new File(metadata);
 	file.hardpath = hardpath;
