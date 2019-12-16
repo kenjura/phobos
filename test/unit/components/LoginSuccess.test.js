@@ -26,9 +26,9 @@ describe('LoginSuccess', () => {
 		const location = {
 			pathname: '/login/success',
 			search: '',
-			hash: '#access_token=qwertyuiop&token_type=bearer&uid=123456&account_id=12345678',
+			hash: '#access_token=qwertyuiop&token_type=bearer&uid=123456&account_id=12345678&state={"postLoginUrl":"http://post.login.url/"}',
 		};
-		const props = { location };
+		const props = { history, location };
 		const expected = {
 			access_token: 'qwertyuiop',
 			ingestResult: 'ACCEPTED:qwertyuiop',
