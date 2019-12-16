@@ -1,8 +1,7 @@
 # Urgent
-+ [ ] resolveMenuOrStyle doesn't work when fuzzypath is an unambiguous file
-+ [ ] resolveMenuOrStyle doesn't work in practice at all
++ [ ] dropbox downloadFile cache is broken! replace with serviceWorker cache!!
 + [ ] need to memoize ArticleLoader parallel loads to avoid redundant calls
-+ [ ] remove test and other objects no longer in use
++ [x] remove test and other objects no longer in use
 
 
 # Alpha 1
