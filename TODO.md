@@ -1,12 +1,17 @@
-# Urgent
-+ [ ] dropbox downloadFile cache is broken! replace with serviceWorker cache!!
-+ [ ] need to memoize ArticleLoader parallel loads to avoid redundant calls
-+ [x] remove test and other objects no longer in use
+# 0.2.0
++ [ ] Style
+  + [ ] Top Menu
+    + [ ] Site root (left column of topMenu and body, expands to show folder structure)
+
+# 0.3.0
++ [ ] Caching
+  + [ ] Implement cache expiry
+  + [ ] Use separate collections for fileList, file, etc?
+  + [ ] Memoization is good, but maybe expire mem cache after a second or two, as indexedDB should handle caching past that point
 
 
 # Alpha 1
 
-+ [ ] Top Menu
 + [ ] Style
 + [ ] Debug Tools (show file metadata, cache info, etc)
 + [ ] Edit Mode
