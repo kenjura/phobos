@@ -26,7 +26,7 @@ export default class Article extends React.Component {
 		const fuzzypath = location.pathname;
 
 		const { article } = await load({ fuzzypath });
-		const body = render(article);
+		const body = article ? render(article) : 'no article found';
 
 		this.setState({ body, loading:false });
 	}

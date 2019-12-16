@@ -1,7 +1,17 @@
+# Urgent
++ resolver > resolveArticle > can't handle it when filteredCandidates.length === 0
+  + it should use a method of constructing paths similar to resolveMenuOrStyle
+
 # 0.2.0
++ [ ] Article
+  + [ ] Auto-index for valid folders with no index
 + [ ] Style
   + [ ] Top Menu
     + [ ] Site root (left column of topMenu and body, expands to show folder structure)
+  + [ ] Preload
+    + [ ] While FileList is loading, show preloader, which prevents actions depending on its completion
+    + [ ] Use cache layer (indexedDB? localstorage?) to prevent hammering FileList
+    + [ ] Ultimately, FileList should be built by a service worker in the background (and synced as such)
 
 # 0.3.0
 + [ ] Caching

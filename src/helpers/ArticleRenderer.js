@@ -6,7 +6,7 @@ import { wikiToHtml } from '../helpers/wikiHelper';
 export { render }
 
 function render(file) {
-	if (!file instanceof File) throw new Error('ArticleRenderer > render > expects a "file" argument which is an instance of File class');
+	if (!(file instanceof File)) throw new Error('ArticleRenderer > render > expects a "file" argument which is an instance of File class');
 
 	const { extension, contents } = file;
 

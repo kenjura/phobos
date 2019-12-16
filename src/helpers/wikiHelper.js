@@ -79,6 +79,7 @@ function wikiToHtml(wikitext, args={}) {
 
 function problems() {
 	console.debug(`wikiHelper > problems > autoH1 doesn't work because we don't know the article name.`)
+	console.debug(`wikiHelper > problems > links aren't rendering right due to lack of linkbase.`)
 }
 
 
@@ -99,11 +100,12 @@ function problems() {
 
 		if (!anchor) anchor = ''; else anchor = '#'+anchor;
 
-		var active = true;
+		var active = false;
 
-		active = _.some(allArticles,function(a){ return a==articleName });
+		// active = allArticles.some(function(a){ return a==articleName });
 
-		var link = linkbase+articleName+anchor;
+		// var link = linkbase+articleName+anchor;
+		var link = articleName+anchor;
 
 		if (articleName.indexOf('/')>-1) {
 			link = '/'+articleName+anchor;

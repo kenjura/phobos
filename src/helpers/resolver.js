@@ -21,12 +21,21 @@ function getArticleCandidates(fuzzypath) {
 		candidates.push({ hardpath:`${pathRoot}${filename}/${filename}.html`, score:[2,1,1] });
 		candidates.push({ hardpath:`${pathRoot}${filename}/${filename}.md`,   score:[2,1,2] });
 		candidates.push({ hardpath:`${pathRoot}${filename}/${filename}.txt`,  score:[2,1,3] });
-		candidates.push({ hardpath:`${pathRoot}${filename}/index.html`,       score:[2,2,1] });
-		candidates.push({ hardpath:`${pathRoot}${filename}/index.md`,         score:[2,2,2] });
-		candidates.push({ hardpath:`${pathRoot}${filename}/index.txt`,        score:[2,2,3] });
-		candidates.push({ hardpath:`${pathRoot}${filename}.html`,             score:[2,3,1] });
-		candidates.push({ hardpath:`${pathRoot}${filename}.md`,               score:[2,3,2] });
-		candidates.push({ hardpath:`${pathRoot}${filename}.txt`,              score:[2,3,3] });
+		candidates.push({ hardpath:`${pathRoot}${filename}/_index.html`,       score:[2,2,1] });
+		candidates.push({ hardpath:`${pathRoot}${filename}/_index.md`,         score:[2,2,2] });
+		candidates.push({ hardpath:`${pathRoot}${filename}/_index.txt`,        score:[2,2,3] });
+		candidates.push({ hardpath:`${pathRoot}${filename}/index.html`,       score:[2,3,1] });
+		candidates.push({ hardpath:`${pathRoot}${filename}/index.md`,         score:[2,3,2] });
+		candidates.push({ hardpath:`${pathRoot}${filename}/index.txt`,        score:[2,3,3] });
+		candidates.push({ hardpath:`${pathRoot}${filename}/_home.html`,       score:[2,4,1] });
+		candidates.push({ hardpath:`${pathRoot}${filename}/_home.md`,         score:[2,4,2] });
+		candidates.push({ hardpath:`${pathRoot}${filename}/_home.txt`,        score:[2,4,3] });
+		candidates.push({ hardpath:`${pathRoot}${filename}/home.html`,       score:[2,5,1] });
+		candidates.push({ hardpath:`${pathRoot}${filename}/home.md`,         score:[2,5,2] });
+		candidates.push({ hardpath:`${pathRoot}${filename}/home.txt`,        score:[2,5,3] });
+		candidates.push({ hardpath:`${pathRoot}${filename}.html`,             score:[2,6,1] });
+		candidates.push({ hardpath:`${pathRoot}${filename}.md`,               score:[2,6,2] });
+		candidates.push({ hardpath:`${pathRoot}${filename}.txt`,              score:[2,6,3] });
 	}
 	if (type==='folder') {
 		throw new Error('why is this happening? this makes no sense');
