@@ -1,0 +1,80 @@
+nav#top-menu {
+  background-image: linear-gradient(-45deg,#ac32e4,#7918f2,#4801ff);
+  color: white;
+  height: 50px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 150;
+  
+  /* specific to TopMenu */
+  .dropdown-menu > ul > li {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+  }
+  .dropdown-menu ul li a {
+    color: inherit;
+    display: inline-block;
+    cursor: pointer;
+    line-height: 20px;
+    padding: 15px 20px;
+    text-decoration: none;
+  }
+  .dropdown-menu ul li a:hover {
+    background: rgba(255,255,255,0.2);
+  }
+  .dropdown-menu ul ul {
+    background-image: linear-gradient(-45deg,#ac32e4,#7918f2,#4801ff);
+
+    li {
+      width: auto;
+    }
+    a {
+      display: block;
+      width: auto;
+      white-space: nowrap;;
+    }
+  }
+
+  /* generic (TODO: move to separate CSS?) */
+  .dropdown-menu a {
+    color: white;
+  }
+  .dropdown-menu li {
+    list-style: none;
+  }
+  .dropdown-menu > ul > li > a {
+  }
+  .dropdown-menu > a:hover {
+  }
+  .dropdown-menu > ul {
+    display: inline-block;
+  }
+  .dropdown-menu ul {
+    margin: 0;
+    padding: 0;
+  }
+  .dropdown-menu > ul > li {
+    display: inline-block;
+    position: relative;
+  }
+  .dropdown-menu ul ul {
+    opacity: 0;
+    position: absolute;
+    visibility: hidden;
+    transition: visibility 0.3s, opacity 0.3s;  
+  }
+  .dropdown-menu > ul > li > ul {
+    left: 0;
+    top: 100%;
+  }
+  .dropdown-menu li:hover > ul {
+    opacity: 1;
+    visibility: visible;
+  }
+  .dropdown-menu ul ul ul {
+    left: 100%;
+    top: 0%;
+  }  
+}

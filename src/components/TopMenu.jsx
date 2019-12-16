@@ -4,6 +4,8 @@ import { load } from '../model/services/ArticleLoader';
 import { render } from '../helpers/ArticleRenderer';
 import { Link, withRouter } from 'react-router-dom';
 
+import './TopMenu.scss';
+
 class TopMenu extends React.Component {
   constructor(props) {
     super(props);
@@ -32,12 +34,12 @@ class TopMenu extends React.Component {
   render() {
     const { body, menu } = this.state;
 
-    return <nav id="nav-main">
+    return <nav id="top-menu">
       {/*<li>
         <Link to="/">Home</Link>
         <Link to="/campaigns/TOS">Example Article</Link>
       </li>*/}
-      <div dangerouslySetInnerHTML={{ __html:body }}></div>
+      <div className="dropdown-menu" dangerouslySetInnerHTML={{ __html:body }}></div>
     </nav>
   }
 

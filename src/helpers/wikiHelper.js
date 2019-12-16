@@ -37,6 +37,43 @@ function wikiToHtml(wikitext, args={}) {
 	html = html.replace( /''([^']+)''/g , '<i>$1</i>' );
 	// html = html.replace( /''(.*?)''/g , '<i>$1</i>' );
 
+	// strikethrough
+	// html = html.replace( /--(.*?)--/g , '<strike>$1</strike>' );
+
+	// embiggen
+	html = html.replace( /\+\+\+([^\+]+)\+\+\+/g , '<span style="font-size: 200%;">$1</span>' );
+	html = html.replace( /\+\+([^\+]+)\+\+/g , '<span style="font-size: 150%;">$1</span>' );
+	// tables
+	html = html.replace( /\{\|([\d\D]*?)\|\}/g , processTable );
+	// div/indent
+	html = html.replace( /^\.\.\.(.*)$/mg , '<div class="indent2">$1</div>' );
+	html = html.replace( /^\.\.(.*)$/mg , '<div class="indent1">$1</div>' );
+	html = html.replace( /^\.(.*)$/mg , '<div>$1</div>' );
+	// links
+	html = html.replace( /\[\[([^\[\]\|#]*)(?:(\|[^\]\|#]*)+)?(?:#([^\]\|#]*))?\]\]/g , processLink );
+	html = html.replace( /\[\[([^\[\]\|#\n]*)((\|[^\]\|#\n]*)+)?(?:#([^\]\|#\n]*))?\]\]/g , processLink );
+	html = html.replace( /\[([^\]\n ]*)(?: ([^\]\n]+))?\]/g , processExternalLink );
+
+	// code
+	// html = html.replace( /^ (.*)$/mg , '<code>$1</code>' );
+	// paragraphs
+	html = html.trim();
+	// html = html.replace( /^.*$/gm , processParagraphs );
+	html = html.replace( /^[^\$\n].*$/gm , processParagraphs );
+	html = html.replace( /<p><\/p>/g , '' );
+	// beautify HTML
+	//html = beautifyHTML(html);
+
+	// superscript
+	html = html.replace( /\^([^\^]*)\^/g , '<sup>$1</sup>' );
+
+	// restore nowiki blocks
+	html = html.replace( /\$NOWIKI_(\d*)\$/g , processNoWikiRestore );
+	html = html.replace( /\$CODE_(\d*)\$/g , processCodeBlockRestore );
+	html = html.replace( /<\/code>\s*<code>/g , '\n' );
+	html = html.replace( /\$HTML_(\d*)\$/g , processHTMLRestore );
+	//html = html.replace( /\$JSON_(\d*)\$/g , processJSONRestore );
+
 	return html;
 }
 
@@ -106,15 +143,15 @@ function problems() {
 			var line = lines[i];
 			if (line.substr(0,1)!='*') continue;
 			var lineLevel = line.match( /\*+/ )[0].length;
-			if (lineLevel > level) html += _.stringRepeat('<ul>',lineLevel-level);
-			if (lineLevel < level) html += _.stringRepeat('</li></ul>',level-lineLevel);
+			if (lineLevel > level) html += '<ul>'.repeat(lineLevel-level);
+			if (lineLevel < level) html += '</li></ul>'.repeat(level-lineLevel);
 			if (lineLevel == level && html != '\n<ul>') html += '</li>';
 			level = lineLevel;
 			//html += '\n'+_.stringRepeat('\t',lineLevel);
 			html += '<li>'+line.replace( /\*+/ , '');
 		}
 
-		if (level > 1) html += _.stringRepeat('</li></ul>',level);
+		if (level > 1) html += '</li></ul>'.repeat(level);
 		html += '</li></ul>\n';
 		return html;
 	};

@@ -9,32 +9,6 @@ body {
 	font-family: Montserrat,sans-serif;
 }
 
-nav#nav-main {
-	background-image: linear-gradient(-45deg,#ac32e4,#7918f2,#4801ff);
-	color: white;
-	height: 50px;
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: 150;
-}
-nav#nav-main li {
-	display: inline-block;
-	list-style: none;
-	padding: 0;
-}
-nav#nav-main li a {
-	color: inherit;
-	display: inline-block;
-	cursor: pointer;
-	line-height: 20px;
-	padding: 15px 20px;
-	text-decoration: none;
-}
-nav#nav-main li a:hover {
-	background: rgba(255,255,255,0.2);
-}
-
 
 main {
 	padding: 20px;
