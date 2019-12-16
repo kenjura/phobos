@@ -3,6 +3,7 @@ import { resolveAndLoad } from './FileLoader';
 import { resolveMenuOrStyle } from '../../helpers/resolver';
 import { loadFileList } from './FileListLoader';
 import { markdownToHtml } from '../../helpers/markdownHelper';
+import { memoize } from '../../helpers/memoize';
 
 export { load };
 
@@ -17,28 +18,21 @@ async function load({ fuzzypath, getFileList=_getFileList, _downloadFile }={}) {
 	return { article, menu, style };
 }
 
-async function loadArticle({ _downloadFile, fuzzypath, fileList }) {
+async function _loadArticle({ _downloadFile, fuzzypath, fileList }) {
 	const file = await resolveAndLoad({ fileList, fuzzypath, _downloadFile, type:'article' });
 	return file;
 }
 
-async function loadMenu({ _downloadFile, fuzzypath, fileList }) {
+async function _loadMenu({ _downloadFile, fuzzypath, fileList }) {
 	const file = await resolveAndLoad({ fileList, fuzzypath, _downloadFile, type:'menu' });
 	return file;
 }
 
-async function loadStyle({ _downloadFile, fuzzypath, fileList }) {
+async function _loadStyle({ _downloadFile, fuzzypath, fileList }) {
 	const file = await resolveAndLoad({ fileList, fuzzypath, _downloadFile, type:'style' });
 	return file;
 }
 
-
-function memoize(method) {
-    let cache = {};
-    
-    return async function() {
-        let args = JSON.stringify(arguments);
-        cache[args] = cache[args] || method.apply(this, arguments);
-        return cache[args];
-    };
-}
+const loadArticle = memoize(_loadArticle);
+const loadMenu = memoize(_loadMenu);
+const loadStyle = memoize(_loadStyle);

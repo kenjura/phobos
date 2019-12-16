@@ -13,8 +13,10 @@ const CONFIG = { // todo: this should be server-side and proxied!
 
 async function downloadFile({ dropbox=getDropbox(), hardpath }) {
 	const cacheKey = `file: ${hardpath}`;
+	const cached = await get(cacheKey);
+	if (cached) return cached;
 	// if (get(cacheKey)) return get(cacheKey);
-	console.warn('dropbox > downloadFile > cache get temporarily disabled!!!');
+	// console.warn('dropbox > downloadFile > cache get temporarily disabled!!!');
 	const path = `${CONFIG.ROOT_PATH}/${hardpath}`.replace(/\/\//g, '/');
 	const response = await dropbox.filesDownload({ path });
 	const fileContent = await readBlob(response.fileBlob);
@@ -42,7 +44,8 @@ function getDropbox() {
 
 async function getFileList(args={}) {
 	const cacheKey = `file-list`;
-	if (get(cacheKey) && !args.noCache) return get(cacheKey);
+	const cached = await get(cacheKey);
+	if (cached && !args.noCache) return cached;
 
 	const dropbox = args.dropbox || getDropbox();
 	if (!dropbox) throw new Error('dropbox > getFileList > not authenticated!');

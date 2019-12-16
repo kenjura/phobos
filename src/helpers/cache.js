@@ -1,15 +1,23 @@
+import Dexie from 'dexie';
+
 export { get, set };
 
-function get(key) {
-	if (sessionStorage.getItem(key)) {
-		console.debug(`cache hit for "${key}" (session storage)`);
-		return JSON.parse(sessionStorage.getItem(key));
-	} else {
-		return 
-	}
+const db = new Dexie('cache-db');
+db.version(1).stores({
+	cache: '++id,date,key,value'
+})
+
+async function get(key) {
+	const cached = await db.cache.where({ key }).toArray(); // TODO: add cache expiry
+	if(!cached || !cached.length) return null;
+	return cached[0].value;
 }
 
-function set(key, val) {
-	const valStr = typeof(val) === 'object' ? JSON.stringify(val) : val;
-	return sessionStorage.setItem(key, valStr);
+async function set(key, value) {
+	const cached = await db.cache.add({
+		key,
+		value,
+		date: Date.now(),
+	});
+	return cached;
 }
