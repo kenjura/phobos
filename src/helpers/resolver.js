@@ -102,7 +102,8 @@ function resolveMenuOrStyle({ fileList, fuzzypath, which, debug='' }={}) {
 	if (debug==='candidates') return { candidates };
 
 	// step 1.5: filter candidates
-	const filteredCandidates = candidates.filter(candidate => fileList.includes(candidate));
+	const fileListFlat = flattenArray(fileList.map(file => file.toLowerCase()));
+	const filteredCandidates = candidates.filter(candidate => fileListFlat[candidate.toLowerCase()]);
 
 	// step 2: score candidates
 	const scoredCandidates = filteredCandidates.map(candidate => {
@@ -115,6 +116,15 @@ function resolveMenuOrStyle({ fileList, fuzzypath, which, debug='' }={}) {
 
 	const sortedCandidates = sortByScore(scoredCandidates, c => c.score);
 	return sortedCandidates[0];
+}
+
+function flattenArray(arr) {
+	// flattens an array of strings
+	let obj = {};
+	for (let i = 0; i < arr.length; i++) {
+		obj[arr[i]] = arr[i];
+	}
+	return obj;
 }
 
 function cascadePath({ startPath, rootPath }={}) {

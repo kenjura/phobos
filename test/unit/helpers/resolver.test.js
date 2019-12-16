@@ -94,6 +94,15 @@ test('resolveMenuOrStyle > returns correct candidate test case 2 ', () => {
 	expect(actual).toStrictEqual(expected);
 })
 
+test('resolveMenuOrStyle > returns correct candidate test case 3 ', () => {
+	const fileList = fileLists[1];
+	const fuzzypath = '/foo.md';
+	const which = 'menu';
+	const expected = '/menu.html';
+	const actual = resolveMenuOrStyle({ fileList, fuzzypath, which }).hardpath;
+	expect(actual).toStrictEqual(expected);
+})
+
 // warning: this test is invalid; fileLists[1] is not the correct candidate list for /foo/bar
 // test.skip('resolveMenuOrStyle > returns correct candidate test case 3 ', () => {
 // 	const fileList = fileLists[1];

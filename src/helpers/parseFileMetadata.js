@@ -42,8 +42,12 @@ function getStartPath(filepath) {
 	// console.debug({ filepath, filename, path, type });
 	const startPath = type === 'file' && path 
 		|| type === 'folder' && `${path}/` 
-		|| type === 'ambiguous' && `${path}${filename}/`;
+		|| type === 'ambiguous' && `${ensureTrailingSlash(path)}${filename}/`;
 	return startPath.replace(/\/\//g, '/'); // cheesy hack for folder "/" returning "//"
+}
+
+function ensureTrailingSlash(filepath) {
+	return filepath.substr(-1) === '/' ? filepath : `${filepath}/`;
 }
 
 function getTitle(filepath) {

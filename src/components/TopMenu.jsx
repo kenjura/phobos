@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { load } from '../model/services/ArticleLoader';
-import { markdownToHtml } from '../helpers/markdownHelper';
-import { isAuthenticated } from '/model/services/dropbox.js';
+import { render } from '../helpers/ArticleRenderer';
 import { Link, withRouter } from 'react-router-dom';
 
 class TopMenu extends React.Component {
@@ -25,7 +24,7 @@ class TopMenu extends React.Component {
     const fuzzypath = location.pathname;
 
     const { menu } = await load({ fuzzypath });
-    const body = markdownToHtml(menu.contents);
+    const body = render(menu);
 
     this.setState({ body, loading:false });
   }
@@ -34,10 +33,10 @@ class TopMenu extends React.Component {
     const { body, menu } = this.state;
 
     return <nav id="nav-main">
-      <li>
+      {/*<li>
         <Link to="/">Home</Link>
         <Link to="/campaigns/TOS">Example Article</Link>
-      </li>
+      </li>*/}
       <div dangerouslySetInnerHTML={{ __html:body }}></div>
     </nav>
   }

@@ -2,7 +2,7 @@ import File from '../classes/File.js';
 import FileList from '../classes/FileList.js';
 
 import { downloadFile } from '../services/dropbox.js';
-import { parseFileMetadata } from '../../helpers/parseFileMetadata.js';
+import { getExtension, parseFileMetadata } from '../../helpers/parseFileMetadata.js';
 import { resolveArticle, resolveMenuOrStyle } from '../../helpers/resolver.js';
 
 export { load, resolveAndLoad };
@@ -33,6 +33,7 @@ async function resolveAndLoad({ fileList, fuzzypath, _downloadFile, type }) {
 	if (!resolution) return null;
 	const { hardpath } = resolution;
 	const file = new File(metadata);
+	file.extension = getExtension(hardpath);
 	file.hardpath = hardpath;
 	await load({ file, _downloadFile });
 	return file;

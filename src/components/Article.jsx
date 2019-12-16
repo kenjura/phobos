@@ -1,5 +1,5 @@
 import { load } from '../model/services/ArticleLoader';
-import { markdownToHtml } from '../helpers/markdownHelper';
+import { render } from '../helpers/ArticleRenderer';
 
 import React from 'react';
 
@@ -26,7 +26,7 @@ export default class Article extends React.Component {
 		const fuzzypath = location.pathname;
 
 		const { article } = await load({ fuzzypath });
-		const body = markdownToHtml(article.contents);
+		const body = render(article);
 
 		this.setState({ body, loading:false });
 	}

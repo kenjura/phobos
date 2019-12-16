@@ -7,23 +7,14 @@ const { downloadFile, getFileList } = getMockServices();
 test('load > test case 1', async () => {
 	const fuzzypath = '/foo';
 	const expected = {
-		article: {
-			file: {
-				contents: 'foo contents',
-				extension: '.md',
-				filename: 'foo.md',
-				hardpath: '/foo.md',
-				type: 'file',
-			}
-		},
-		menu: null,
-		style: null,
+		article: { contents: 'foo contents' },
+		menu: { contents: 'menu contents' },
+		style: { contents: 'style contents' },
 	}
 	const actual = await load({ fuzzypath, _downloadFile:downloadFile, getFileList });
-	expect(actual.extension).toStrictEqual(expected.extension);
-	expect(actual.filename).toStrictEqual(expected.filename);
-	expect(actual.hardpath).toStrictEqual(expected.hardpath);
-	expect(actual.contents).toStrictEqual(expected.contents);
+	expect(actual.article.contents).toStrictEqual(expected.article.contents);
+	expect(actual.menu.contents).toStrictEqual(expected.menu.contents);
+	expect(actual.style.contents).toStrictEqual(expected.style.contents);
 })
 
 
