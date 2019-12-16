@@ -15,22 +15,30 @@ export default class LoginSuccess extends React.Component {
   }
 
   componentDidMount() {
-    const { history } = this.props;
-    const { search } = location;
-    const { access_token } = parse(search);
+    console.log('LoginSuccess');
+    this.start(this.props);
+  }
 
-    ingestAccessToken(access_token);
+  start({ history, location }) {
+    const { hash } = location;
+    const { access_token, state } = parse(hash);
 
-    const postLoginUrl = localStorage.getItem('postLoginUrl');
+    const ingestResult = ingestAccessToken(access_token);
+
+    const { postLoginUrl } = JSON.parse(state) || {};
     this.setState({ postLoginUrl });
 
-    if (postLoginUrl) history.push(postLoginUrl);
+    if (postLoginUrl) history.push(postLoginUrl); // TODO: validate this a bit more
+
+    return { access_token, ingestResult };
+
   }
 
   render() {
     const { postLoginUrl } = this.state;
     return postLoginUrl
-      ? <div>redirecting to <Link to={postLoginUrl}>{postLoginUrl}</Link></div>
+      // ? <div>redirecting to <Link to={postLoginUrl}>{postLoginUrl}</Link></div>
+      ? <div>TEMP MESSAGE: login successful. post login url = <a href={postLoginUrl}>{postLoginUrl}</a></div>
       : <div>login was successful, but we don't know where to go from here for some reason. <Link to="/">click here</Link> to go home.</div>;
   }
 

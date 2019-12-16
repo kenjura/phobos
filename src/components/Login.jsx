@@ -18,16 +18,17 @@ export default class Login extends React.Component {
     const { search } = location;
     const { access_token, postLoginUrl } = parse(search);
 
-    localStorage.setItem('postLoginUrl', postLoginUrl);
+    // localStorage.setItem('postLoginUrl', postLoginUrl);
 
     const returnUrl = window.location.origin + '/login/success';
+    const state = { postLoginUrl };
 
     // if (returnUrl === 'success') {
       // ingestAccessToken(access_token);
       // const url = localStorage.getItem('returnUrl'); // TODO: no! no!
       // history.push(url);
     // } else {
-      getLogin({ returnUrl })
+      getLogin({ returnUrl, state })
         .then(loginUrl => this.setState({ loginUrl }))
         .catch(err => console.error(err));
     // }

@@ -1,5 +1,6 @@
 import { Dropbox } from 'dropbox';
 import { get, set } from '../../helpers/cache.js';
+import { parse } from 'query-string';
 
 export { downloadFile, getDropbox, getFileList, getLogin, ingestAccessToken, isAuthenticated };
 
@@ -21,9 +22,12 @@ async function downloadFile({ dropbox=getDropbox(), hardpath }) {
 	return fileContent;
 }
 
-async function getLogin({ returnUrl='http://localhost:8080/login/success' }={}) {
+async function getLogin({ returnUrl='http://localhost:8080/login/success', state={} }={}) {
 	const dbx = new Dropbox({ clientId: CONFIG.CLIENT_ID });
-	const authUrl = dbx.getAuthenticationUrl(returnUrl);
+	const authUrl = dbx.getAuthenticationUrl(
+		returnUrl,
+		typeof(state) === 'string' ? state : JSON.stringify(state)
+	);
 	return authUrl;
 }
 
@@ -77,13 +81,29 @@ async function getFileList(args={}) {
 }
 
 function ingestAccessToken(_token) {
-	const token = _token || window.location.hash.substr(1).split('&').filter(a => a.match('access_token'))[0].substr(13);
+	console.log('real fn');
+	const token = 
+		_token 
+		|| parseMagicalBullshitDropboxReturnUrlInHistoryStateForSomeFuckingReason()
+		|| window.location.hash.substr(1).split('&').filter(a => a.match('access_token'))[0].substr(13);
 	localStorage.setItem('accessToken', token);
+	return true;
 }
 
 function isAuthenticated() {
 	// return window.location.hash.match('access_token');
 	return localStorage.getItem('accessToken');
+}
+
+function parseMagicalBullshitDropboxReturnUrlInHistoryStateForSomeFuckingReason() {
+	if (window.history.state && window.history.state.returnUrl) {
+		const url = window.history.state.returnUrl;
+		const fakeQueryString = url.substr(url.indexOf('#')+1);
+		const fakeQsParms = fakeQueryString.split('&').map(kvp => ({ [kvp.split('=')[0]]:kvp.split('=')[1] }));
+		return fakeQsParms['access_token'];
+	}
+
+	//http://localhost:8080/login/success#access_token=vEY8dPHtxfAAAAAAAAIwtRI5qcRty0oiqljOADPgYYqu2Kg87-YtEtdSm9rOQ1LX&token_type=bearer&uid=12374&account_id=dbid%3AAAAyOtafrGch4qolGhCZAlG-qB7MpQtIgDQ
 }
 
 
