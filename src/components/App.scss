@@ -11,9 +11,11 @@ body {
 
 
 main {
+	left: 20em;
 	padding: 20px;
 	position: absolute;
 	top: 50px;
+	width: calc(100vw - 20em);
 }
 
 #article-status {

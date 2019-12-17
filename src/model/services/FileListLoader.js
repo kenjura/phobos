@@ -1,13 +1,12 @@
 import FileList from '../classes/FileList.js';
 
+import { getFileList as _getFileList } from './dropbox';
 import { parseFileMetadata } from '../../helpers/parseFileMetadata.js';
 import { memoize } from '../../helpers/memoize';
 
 export { loadFileList, treeFrom };
 
-async function _loadFileList({ getFileList }={}) {
-	if (!getFileList) throw new Error('FileListLoader > load > requires argument "getFileList"');
-
+async function _loadFileList({ getFileList=_getFileList }={}) {
 	const fileList = await getFileList();
 	return fileList;
 }

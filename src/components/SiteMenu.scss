@@ -1,0 +1,13 @@
+
+nav#site-menu {
+	background-color: #29282e;
+	height: calc(100vh - 50px);
+	overflow: auto;
+	position: fixed;
+	top: 50;
+	width: 20em;
+
+	ul.ant-tree, .ant-tree-title, i {
+		color: #ccc;
+	}
+}

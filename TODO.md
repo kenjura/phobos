@@ -1,6 +1,6 @@
 # Urgent
-+ resolver > resolveArticle > can't handle it when filteredCandidates.length === 0
-  + it should use a method of constructing paths similar to resolveMenuOrStyle
++ [x] History events (Link, etc) do not trigger article reload!
++ [ ] Folder names such as "7.8" resolve as unambiguous files!
 
 # 0.2.0
 + [ ] Article
@@ -18,6 +18,10 @@
   + [ ] Implement cache expiry
   + [ ] Use separate collections for fileList, file, etc?
   + [ ] Memoization is good, but maybe expire mem cache after a second or two, as indexedDB should handle caching past that point
+
+# Consider
++ resolver > resolveArticle > can't handle it when filteredCandidates.length === 0
+  + it should use a method of constructing paths similar to resolveMenuOrStyle
 
 
 # Alpha 1

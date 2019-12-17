@@ -1,5 +1,7 @@
 export { wikiToHtml }
 
+const instance = {}; // ew
+
 function wikiToHtml(wikitext, args={}) {
 	let html = String(wikitext);
 

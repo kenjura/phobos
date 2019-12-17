@@ -60,6 +60,7 @@ function resolveArticle({ fileList, fuzzypath }={}) {
 }
 
 const EXTENSIONS = {
+	ARTICLE: [ '.html', '.md', '.txt' ],
 	MENU: [ '.html', '.yml', '.md', '.txt' ],
 	STYLE: [ '.css', '.txt' ],
 }

@@ -4,15 +4,18 @@ import LoginSuccess from './LoginSuccess';
 import React from 'react';
 import TopMenu from './TopMenu';
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { SiteMenuLoader } from './SiteMenu';
+import { BrowserRouter as Router, Switch, Route, Link, withRouter } from "react-router-dom";
 
 import './App.scss';
+import 'antd/dist/antd.css';
 
 export default class App extends React.Component {
 	render() {
 		return <div id="app">
 			<Router>
-				<TopMenu />
+				<Route path="*" render={props => <TopMenu key={props.location.pathname} {...props} />} />
+				<Route path="*" component={SiteMenuLoader} />
 				<main>
 					<Switch>
 			          <Route exact path="/login/success" component={LoginSuccess} />
