@@ -12,7 +12,7 @@ async function _loadFileList({ getFileList }={}) {
 	return fileList;
 }
 
-function treeFrom({ fileList, keys={} }) {
+function treeFrom({ fileList, keys={}, transformFn=a=>a }) {
 	if (!fileList || !Array.isArray(fileList)) throw new Error('FileListLoader > treeFrom > argument "fileList" is missing or in an invalid format');
 
 	// is there a better way to do this?
@@ -31,6 +31,7 @@ function treeFrom({ fileList, keys={} }) {
 	tree.forEach(obj => {
 			obj[keys.children] = tree.filter(t => t[keys.parent] === obj[keys.path]);
 		});
+	tree.forEach(transformFn);
 	const finalTree = tree.filter(t => t[keys.parent] === null);
 
 	return finalTree;

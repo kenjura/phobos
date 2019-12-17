@@ -73,6 +73,45 @@ describe('FileListLoader', () => {
 		];
 		const actual = treeFrom({ fileList, keys });
 		expect(actual).toStrictEqual(expected);
+	});
+
+	test('treeFrom > test case 3', async () => {
+		const fileList = [
+			'/foo',
+			'/foo/bar',
+			'/goo',
+		];
+		const keys = {
+			children: 'nodes',
+			parent: 'parent',
+			path: 'key',
+		};
+		const transformFn = obj => {
+			obj.label = obj.key;
+		};
+		const expected = [
+			{ 
+				key: '/foo',
+				label: '/foo',
+				parent: null,
+				nodes: [
+					{
+						key: '/foo/bar',
+						label: '/foo/bar',
+						parent: '/foo',
+						nodes: []
+					},					
+				]
+			},
+			{
+				key: '/goo',
+				label: '/goo',
+				parent: null,
+				nodes: [],
+			}
+		];
+		const actual = treeFrom({ fileList, keys, transformFn });
+		expect(actual).toStrictEqual(expected);
 	})
 
 });
