@@ -2,6 +2,8 @@ import { titleCase } from "title-case";
 
 export { getExtension, getFilename, getPath, getStartPath, getTitle, getType, parseFileMetadata };
 
+const KNOWN_EXTENSIONS = [ '.md', '.txt', '.css', '.html', '.yml' ];
+
 function parseFileMetadata(filepath) {
 	// var filename = fullPath.replace(/^.*[\\\/]/, '')
 	// return str.split('\\').pop().split('/').pop();
@@ -19,7 +21,8 @@ function parseFileMetadata(filepath) {
 function getExtension(filepath='') {
 	const extIndex = filepath.lastIndexOf('.');
 	if (extIndex === -1) return null;
-	else return filepath.substr(extIndex);
+	const ext = filepath.substr(extIndex);
+	return KNOWN_EXTENSIONS.includes(ext) ? ext : null;
 }
 
 function getFilename(filepath='') {
@@ -58,7 +61,7 @@ function getTitle(filepath) {
 function getType(filepath='') {
 	const ext = getExtension(filepath);
 
-	if (ext) return 'file';
+	if (ext && KNOWN_EXTENSIONS.includes(ext)) return 'file';
 	if (filepath.substr(-1) === '/') return 'folder';
 	else return 'ambiguous';
 }
