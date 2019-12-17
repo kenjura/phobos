@@ -1,8 +1,11 @@
 import { getAutoIndex, load } from '../model/services/ArticleLoader';
 import { Link } from 'react-router-dom';
 import { render } from '../helpers/ArticleRenderer';
+import { Icon, Tooltip } from 'antd';
 
 import React from 'react';
+
+import './Article.scss';
 
 export default class Article extends React.Component {
 	constructor(props) {
@@ -32,11 +35,13 @@ export default class Article extends React.Component {
 		const autoIndex = article ? [] : await getAutoIndex({ fuzzypath });
 		const hardpath = article ? article.hardpath : fuzzypath;
 
-		this.setState({ autoIndex, body, hardpath, loading:false });
+		this.setState({ article, autoIndex, body, hardpath, loading:false });
 	}
 
 	render() {
-		const { articlePath, autoIndex, body, content, fileList, hardpath, loading } = this.state;
+		const { article, articlePath, autoIndex, body, content, fileList, hardpath, loading } = this.state;
+
+		const articleMetadata = <ArticleMetadata {...article} />;
 
 		return <article className="article">
 
@@ -55,15 +60,15 @@ export default class Article extends React.Component {
 
 			{ loading ? 'loading...' : '' }
 
-			<div id="article-status">
-				{ hardpath }
-			</div>
+			<Tooltip title={articleMetadata}>
+				<Icon type="question-circle" id="article-debug-info" />
+			</Tooltip>
 		</article>
 	}
 }
 
-const ArticleMetadata = props => <div style={{ background:'#EEE', margin:'20px' }}>
-	<table>
+const ArticleMetadata = props => <div>
+	<table style={{ color:'white' }}>
 		<tbody>
 			<tr>
 				<th>Extension</th>
@@ -75,7 +80,7 @@ const ArticleMetadata = props => <div style={{ background:'#EEE', margin:'20px' 
 			</tr>
 			<tr>
 				<th>Path</th>
-				<td>{ props.path }</td>
+				<td>{ props.hardpath }</td>
 			</tr>
 			<tr>
 				<th>Title</th>
