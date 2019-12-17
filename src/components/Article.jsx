@@ -1,4 +1,5 @@
-import { load } from '../model/services/ArticleLoader';
+import { getAutoIndex, load } from '../model/services/ArticleLoader';
+import { Link } from 'react-router-dom';
 import { render } from '../helpers/ArticleRenderer';
 
 import React from 'react';
@@ -9,7 +10,8 @@ export default class Article extends React.Component {
 
 		this.state = {
 			articlePath: '',
-			article: null,
+			article: {},
+			autoIndex: [],
 			fileList: [],
 			loading: false,
 		}
@@ -27,19 +29,35 @@ export default class Article extends React.Component {
 
 		const { article } = await load({ fuzzypath });
 		const body = article ? render(article) : 'no article found';
+		const autoIndex = article ? [] : await getAutoIndex({ fuzzypath });
+		const hardpath = article ? article.hardpath : fuzzypath;
 
-		this.setState({ body, loading:false });
+		this.setState({ autoIndex, body, hardpath, loading:false });
 	}
 
 	render() {
-		const { articlePath, body, content, fileList, loading } = this.state;
+		const { articlePath, autoIndex, body, content, fileList, hardpath, loading } = this.state;
 
 		return <article className="article">
 
-			<div id="main-content" dangerouslySetInnerHTML={{ __html:body }}>
-			</div>
+			{ autoIndex.length ? 
+				<div id="main-content">
+					No article found at this location. Here is an index:
+
+					<ul>
+						{ autoIndex.map(i => <li key={i}><Link to={i}>{i}</Link></li>) }
+					</ul>
+				</div>
+			:
+				<div id="main-content" dangerouslySetInnerHTML={{ __html:body }}>
+				</div>
+			}
 
 			{ loading ? 'loading...' : '' }
+
+			<div id="article-status">
+				{ hardpath }
+			</div>
 		</article>
 	}
 }
