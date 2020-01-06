@@ -145,15 +145,15 @@ function problems() {
 			var line = lines[i];
 			if (line.substr(0,1)!='#') continue;
 			var lineLevel = line.match( /#+/ )[0].length;
-			if (lineLevel > level) html += _.stringRepeat('<ol>',lineLevel-level);
-			if (lineLevel < level) html += _.stringRepeat('</li></ol>',level-lineLevel);
+			if (lineLevel > level) html += '<ol>'.repeat(lineLevel-level);
+			if (lineLevel < level) html += '</li></ol>'.repeat(level-lineLevel);
 			if (lineLevel == level && html != '\n<ol>') html += '</li>';
 			level = lineLevel;
 			//html += '\n'+_.stringRepeat('\t',lineLevel);
 			html += '<li>'+line.replace( /#+/ , '');
 		}
 
-		if (level > 1) html += _.stringRepeat('</li></ol>',level);
+		if (level > 1) html += '</li></ol>'.repeat(level);
 		html += '</li></ol>\n';
 		return html;
 	};

@@ -1,6 +1,17 @@
+# Most Urgent
++ [ ] Starting app is unreliable. It just does nothing sometimes, with no status or console bugs. Not ready to export to others.
+
 # Urgent
 + [x] History events (Link, etc) do not trigger article reload!
-+ [ ] Folder names such as "7.8" resolve as unambiguous files!
++ [x] Folder names such as "7.8" resolve as unambiguous files!
++ [ ] Top Menu links are hard links, not history pushes
++ [ ] Top menu links aren't rendered properly in Markdown
+
+# When?
++ [ ] Images
+  + [ ] uh....
+  + [ ] somehow we have to load these from dropbox...
++ [ ] Manual cache clear for current article/menu/style
 
 # 0.2.0
 + [ ] Article

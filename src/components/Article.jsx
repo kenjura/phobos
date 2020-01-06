@@ -1,6 +1,6 @@
 import { getAutoIndex, load } from '../model/services/ArticleLoader';
 import { Link } from 'react-router-dom';
-import { render } from '../helpers/ArticleRenderer';
+import { render, sectionify } from '../helpers/ArticleRenderer';
 import { Icon, Tooltip } from 'antd';
 
 import React from 'react';
@@ -31,7 +31,7 @@ export default class Article extends React.Component {
 		const fuzzypath = location.pathname;
 
 		const { article } = await load({ fuzzypath });
-		const body = article ? render(article) : 'no article found';
+		const body = article ? sectionify(render(article)) : 'no article found';
 		const autoIndex = article ? [] : await getAutoIndex({ fuzzypath });
 		const hardpath = article ? article.hardpath : fuzzypath;
 
@@ -46,7 +46,7 @@ export default class Article extends React.Component {
 		return <article className="article">
 
 			{ autoIndex.length ? 
-				<div id="main-content">
+				<div id="mainContent">
 					No article found at this location. Here is an index:
 
 					<ul>
@@ -54,7 +54,7 @@ export default class Article extends React.Component {
 					</ul>
 				</div>
 			:
-				<div id="main-content" dangerouslySetInnerHTML={{ __html:body }}>
+				<div id="mainContent" dangerouslySetInnerHTML={{ __html:body }}>
 				</div>
 			}
 

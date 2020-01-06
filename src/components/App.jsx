@@ -5,6 +5,7 @@ import React from 'react';
 import TopMenu from './TopMenu';
 
 import { SiteMenuLoader } from './SiteMenu';
+import { StyleLoader } from './Style';
 import { BrowserRouter as Router, Switch, Route, Link, withRouter } from "react-router-dom";
 
 import './App.scss';
@@ -16,6 +17,7 @@ export default class App extends React.Component {
 			<Router>
 				<Route path="*" render={props => <TopMenu key={props.location.pathname} {...props} />} />
 				<Route path="*" component={SiteMenuLoader} />
+				<Route path="*" render={props => <StyleLoader key={props.location.pathname} {...props} />} />
 				<main>
 					<Switch>
 			          <Route exact path="/login/success" component={LoginSuccess} />
