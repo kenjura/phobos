@@ -1,4 +1,4 @@
-import { downloadFile, getFileList as _getFileList } from './dropbox';
+import { downloadFile, getFileList as _getFileList, uploadFile } from './dropbox';
 import { resolveAndLoad } from './FileLoader';
 import { resolveMenuOrStyle } from '../../helpers/resolver';
 import { loadFileList } from './FileListLoader';
@@ -9,7 +9,7 @@ const loadArticle = memoize(_loadArticle);
 const loadMenu = memoize(_loadMenu);
 const loadStyle = memoize(_loadStyle);
 
-export { getAutoIndex, load, loadArticle, loadMenu, loadStyle };
+export { getAutoIndex, load, loadArticle, loadMenu, loadStyle, save };
 
 async function getAutoIndex({ fuzzypath, getFileList=_getFileList, _downloadFile=downloadFile }) {
 	if (!fuzzypath) throw new Error('Article > load > fuzzypath is required');
@@ -52,4 +52,9 @@ async function _loadMenu({ _downloadFile, fuzzypath, fileList }) {
 async function _loadStyle({ _downloadFile, fuzzypath, fileList }) {
 	const file = await resolveAndLoad({ fileList, fuzzypath, _downloadFile, type:'style' });
 	return file;
+}
+
+async function save({ hardpath, contents }) {
+	const result = await uploadFile({ hardpath, contents });
+	return result;
 }

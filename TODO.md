@@ -1,3 +1,14 @@
+# In Progress
++ [ ] Edit Mode
+  + [x] Edit mode UI in Article.jsx
+  + [ ] Edit mode UI but it actually looks good
+  + [ ] Way to enter/exit edit mode by modifying search string
+  + [x] Add save() to ArticleLoader
+  + [x] Add uploadFile() to dropbox
+  + [ ] Preserve original capitalization of filename in hardpath (otherwise Dropbox will rename file)
+  + [ ] Update cache after successful upload
+  + [ ] Verify upload success and notify user (or notify of failure state)
+
 # Most Urgent
 + [ ] Starting app is unreliable. It just does nothing sometimes, with no status or console bugs. Not ready to export to others.
 

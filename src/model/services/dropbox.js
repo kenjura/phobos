@@ -2,7 +2,7 @@ import { Dropbox } from 'dropbox';
 import { get, set } from '../../helpers/cache.js';
 import { parse } from 'query-string';
 
-export { downloadFile, getDropbox, getFileList, getLogin, ingestAccessToken, isAuthenticated };
+export { downloadFile, getDropbox, getFileList, getLogin, ingestAccessToken, isAuthenticated, uploadFile };
 
 
 const CONFIG = { // todo: this should be server-side and proxied!
@@ -119,4 +119,17 @@ function readBlob(blob) {
 		reader.addEventListener('loadend', () => resolve(reader.result));
 		reader.readAsText(blob);
 	});
+}
+
+
+async function uploadFile({ dropbox=getDropbox(), hardpath, contents }) {
+	const path = `${CONFIG.ROOT_PATH}/${hardpath}`.replace(/\/\//g, '/');
+	const obj = {
+		contents,
+		path,
+		mode: 'overwrite',
+	}
+	const response = await dropbox.filesUpload(obj);
+	const filesMetadata = await readBlob(response.fileBlob);
+	return filesMetadata;
 }

@@ -23,7 +23,7 @@ export default class App extends React.Component {
 			          <Route exact path="/login/success" component={LoginSuccess} />
 			          <Route exact path="/login" component={Login} />
 			          <Route exact path="/" component={Home} />
-			          <Route path="/*" render={props => <Article key={props.location.pathname} {...props} />} />
+			          <Route path="/*" render={props => <Article key={`${props.location.pathname}?${props.location.search}`} foo={`${props.location.pathname}?${props.location.search}`} {...props} />} />
 			        </Switch>
 			    </main>
 			</Router>

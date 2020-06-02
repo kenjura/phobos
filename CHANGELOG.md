@@ -1,3 +1,8 @@
+# 0.3.0
++ Added rudimentary edit mode
+  + It actually works, but it doesn't preserve capitalization of filenames, and the UI is bad
+  + Also there may be caching issues, need to bust cache after update
+
 # 0.2.0
 + Added styles and menus.
 + Added FileList

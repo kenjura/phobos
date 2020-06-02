@@ -9,4 +9,14 @@ article.article {
 		font-family: Montserrat;
 		width: 40em;
 	}
+
+	#article-edit {
+		textarea {
+		    width: 100%;
+		    min-height: 20em;
+		    background-color: rgba(32,33,34,1);
+		    padding: 10px;
+		    font-family: monospace;
+		}
+	}
 }
